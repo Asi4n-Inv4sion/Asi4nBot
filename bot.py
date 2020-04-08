@@ -5,6 +5,10 @@ from discord.ext import commands
 
 client = commands.Bot(command_prefix = '/')
 
+################################
+# EVENTS
+################################
+
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
@@ -13,22 +17,6 @@ async def on_ready():
 async def on_message(message):
     if message.author == client.user:
         return
-
-    if message.content.startswith('/nuke'):
-        await message.channel.send('<:nuke:535289100761038869> TACTICAL NUKE INCOMING <:nuke:535289100761038869>')
-
-    if message.content.startswith('/tsar bomba'):
-        await message.channel.send('The Tsar Bomba was the biggest bomb ever created. \nTested on 30 October 1961 as an experimental verification of calculation principles and multi-stage thermonuclear weapon designs, it also remains the most powerful human-made explosive ever detonated.')
-        await message.channel.send("It's frequently dropped by Cameron 'fucking' Neethling")
-
-    if message.content.startswith('/dinner'):
-        await message.channel.send('<@&631594442771660801> the table is set.')
-
-    if message.content.startswith('/gay'):
-        await message.channel.send('read if gay')
-
-    if message.content.startswith('/zak'):
-        await message.channel.send('<@!246036648465399809> say nothing if gay')
 
     await client.process_commands(message) # THIS MAKES SURE THE COMMANDS EXTENSION WORKS
 
@@ -40,6 +28,30 @@ async def on_message_delete(message):
     else:
         print(f'Deleted "{message.content}" by {message.author.mention}')
         await message.channel.send(f"{message.author.mention}'s message got deleted: {message.content}")
+
+################################
+# COMMANDS
+################################
+
+@client.command()
+async def dinner(ctx):
+    await ctx.send('<@&631594442771660801> the table is set.')
+
+
+@client.command()
+async def nuke(ctx):
+    await ctx.send('<:nuke:535289100761038869> TACTICAL NUKE INCOMING <:nuke:535289100761038869>')
+
+
+@client.command()
+async def tsar_bomba(ctx):
+    await ctx.send(("The Tsar Bomba was the biggest bomb ever created. \nTested"
+                    "on 30 October 1961 as an experimental verification of "
+                    "calculation principles and multi-stage thermonuclear weapon "
+                    "designs, it also remains the most powerful human-made "
+                    "explosive ever detonated.\nIt's frequently dropped by "
+                    "Cameron 'fucking' Neethling"))
+
 
 @client.command()
 async def jason(ctx, num = ''):
