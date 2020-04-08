@@ -92,4 +92,4 @@ async def clear(ctx, num=0):
     await ctx.send(f"Deleted {num} messages!")
 
 
-client.run('Njk1Nzc3NDIzNDU4OTU5NDEw.XokeEw.-AhrLA3fF9PW7cY-QGZ4gjLEtz4')
+client.run(TOKEN)
