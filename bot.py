@@ -6,7 +6,7 @@ import time
 from discord.ext import commands
 
 client = commands.Bot(command_prefix = '/')
-f = open('BotToken.txt', 'r')
+f = open('BotToken.txt', 'r')  # BotToken.txt contains the private token
 TOKEN = f.readline()
 f.close()
 
