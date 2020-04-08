@@ -74,15 +74,10 @@ async def ping(ctx):
 
 
 @client.command()
-async def clear(ctx, num=-1):
-    if (type(num) != int or num <= 0):
-        await ctx.send('Enter a valid integer (/clear {int>0})')
-    else:
-        await ctx.channel.purge(limit = num)
-        time.sleep(2)
-        await ctx.send(f"Deleted {num} messages!")
-        time.sleep(2)
-        await ctx.channel.purge(limit = 1)
+async def clear(ctx, num=0):
+    await ctx.channel.purge(limit = num)
+    time.sleep(2)
+    await ctx.send(f"Deleted {num} messages!")
 
 
 client.run('Njk1Nzc3NDIzNDU4OTU5NDEw.XokeEw.-AhrLA3fF9PW7cY-QGZ4gjLEtz4')
