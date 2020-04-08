@@ -1,9 +1,13 @@
+################################
 # bot.py
+################################
 import discord
 import time
 from discord.ext import commands
 
 client = commands.Bot(command_prefix = '/')
+f = open('BotToken.txt', 'r')
+TOKEN = f.readline()
 
 ################################
 # EVENTS
@@ -92,4 +96,4 @@ async def clear(ctx, num=0):
     await ctx.send(f"Deleted {num} messages!")
 
 
-client.run('Njk1Nzc3NDIzNDU4OTU5NDEw.XokeEw.-AhrLA3fF9PW7cY-QGZ4gjLEtz4')
+client.run(TOKEN)
