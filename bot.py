@@ -1,17 +1,22 @@
 ################################
 # bot.py
 ################################
+
 import discord
 import time
+import os
 from discord.ext import commands
+
 
 ################################
 # INITIALIZING
 ################################
+
 client = commands.Bot(command_prefix = '/')
-f = open('BotToken.txt', 'r')  # BotToken.txt contains the private token
+f = open(os.path.join('D:/Documents/Programming/BotToken.txt'))  # BotToken.txt contains the private token
 TOKEN = f.readline()
 f.close()
+
 
 ################################
 # EVENTS
@@ -20,6 +25,7 @@ f.close()
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
+
 
 @client.event
 async def on_message(message):
