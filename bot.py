@@ -8,6 +8,7 @@ from discord.ext import commands
 client = commands.Bot(command_prefix = '/')
 f = open('BotToken.txt', 'r')
 TOKEN = f.readline()
+f.close()
 
 ################################
 # EVENTS
