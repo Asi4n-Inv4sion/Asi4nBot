@@ -21,9 +21,10 @@ f.close()
 ################################
 
 @client.event
-async def on_ready(self):
-    print('We have logged in as {0.user}'.format(self.client))
-    await client.change_presence(activity = discord.Game('(-_-)'))
+async def on_ready():
+    print('We have logged in as {0.user}'.format(client))
+    await client.change_presence(activity = discord.Game('with my code'))
+
 
 @client.event
 async def on_message(message):
