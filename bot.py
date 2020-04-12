@@ -21,11 +21,6 @@ f.close()
 ################################
 
 @client.event
-async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
-
-
-@client.event
 async def on_message(message):
     if message.author == client.user:
         return
@@ -93,15 +88,29 @@ async def echo(ctx, message: str):
 
 
 @client.command()
-async def ping(ctx):
-    await ctx.send(f'Pong! {round(client.latency * 1000)}ms')
-
-
-@client.command()
 async def clear(ctx, num=0):
     await ctx.channel.purge(limit = num)
     time.sleep(2)
     await ctx.send(f"Deleted {num} messages!")
+
+
+################################
+# COGS
+################################
+
+@client.command()
+async def load(ctx, extension):
+    client.load_extension(f'cogs.{extension}')
+
+
+@client.command()
+async def unload(ctx, extension):
+    client.unload_extension(f'cogs.{extension}')
+
+
+for filename in os.listdir('./cogs'):
+    if filename.endswith('.py'):
+        client.load_extension(f'cogs.{filename[:-3]}')
 
 
 client.run(TOKEN)
