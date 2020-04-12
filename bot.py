@@ -37,6 +37,22 @@ async def unload_cog(ctx, extension):
     print(f'Unloaded cog: {extension}')
 
 
+@client.command()
+@commands.has_permissions(administrator = True)
+async def movehere(ctx): # moves all members in vc to the vc of the author
+    channels = ctx.guild.voice_channels
+    for channel in channels:
+        for member in channel.members:
+            if member == ctx.author:
+                dest = channel
+                break
+
+    for channel in channels:
+        if channel != dest:
+            for member in channel.members:
+                await member.move_to(dest)
+
+
 # LOAD COGS
 
 for filename in os.listdir('./cogs'):
