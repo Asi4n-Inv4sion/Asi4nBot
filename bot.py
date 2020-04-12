@@ -21,6 +21,12 @@ async def on_ready():
     await client.change_presence(activity = discord.Game('with my code'))
 
 
+@client.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.MissingPermissions):
+        await ctx.send('You do not have access to that command.')
+
+
 # COMMANDS
 
 @client.command()
@@ -59,5 +65,7 @@ for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
+
+# RUN
 
 client.run(TOKEN)
