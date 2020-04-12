@@ -21,21 +21,20 @@ async def on_ready():
     await client.change_presence(activity = discord.Game('with my code'))
 
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
+# COMMANDS
 
-    await client.process_commands(message) # THIS MAKES SURE THE COMMANDS EXTENSION WORKS
+@client.command()
+@commands.has_permissions(administrator = True)
+async def load_cog(ctx, extension):
+    client.load_extension(f'cogs.{extension}')
+    print(f'Loaded cog: {extension}')
 
 
-@client.event
-async def on_message_delete(message):
-    if (message.author.bot):
-        return
-    else:
-        print(f'Deleted "{message.content}" by {message.author.mention}')
-        await message.channel.send(f"{message.author.mention}'s message got deleted: {message.content}")
+@client.command()
+@commands.has_permissions(administrator = True)
+async def unload_cog(ctx, extension):
+    client.unload_extension(f'cogs.{extension}')
+    print(f'Unloaded cog: {extension}')
 
 
 # LOAD COGS

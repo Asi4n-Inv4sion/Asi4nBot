@@ -65,6 +65,7 @@ class Message_Commands(commands.Cog):
 
 
     @commands.command()
+    @commands.has_permissions(manage_messages = True)
     async def clear(self, ctx, num=0):
         await ctx.channel.purge(limit = num)
         time.sleep(2)
