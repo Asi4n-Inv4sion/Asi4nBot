@@ -25,6 +25,7 @@ async def on_ready():
 async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingPermissions):
         await ctx.send('You do not have access to that command.')
+        print(f"{ctx.message.author} tried to use a command they don't have access to")
 
 
 # COMMANDS
@@ -57,6 +58,9 @@ async def movehere(ctx): # moves all members in vc to the vc of the author
         if channel != dest:
             for member in channel.members:
                 await member.move_to(dest)
+
+    await ctx.send(f'Moved all members to channel: {dest.name}')
+    print(f'{ctx.author} moved all members to channel: {dest.name}')
 
 
 # LOAD COGS

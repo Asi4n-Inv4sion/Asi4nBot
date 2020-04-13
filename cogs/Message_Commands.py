@@ -15,16 +15,19 @@ class Message_Commands(commands.Cog):
     @commands.command()
     async def ping(self, ctx):
         await ctx.send(f'Pong! {round(self.client.latency * 1000)}ms')
+        print(f'Ping: {self.client.letency * 1000}ms')
 
 
     @commands.command()
     async def dinner(self, ctx):
         await ctx.send('<@&631594442771660801> the table is set.')
+        print('Dinner has been called')
 
 
     @commands.command()
     async def nuke(self, ctx):
         await ctx.send('<:nuke:535289100761038869> TACTICAL NUKE INCOMING <:nuke:535289100761038869>')
+        print('A nuke was dropped')
 
 
     @commands.command()
@@ -35,6 +38,7 @@ class Message_Commands(commands.Cog):
                         "designs, it also remains the most powerful human-made "
                         "explosive ever detonated.\nIt's frequently dropped by "
                         "Cameron 'fucking' Neethling"))
+        print('The tsar bomba was the BIGGEST BOMB')
 
 
     @commands.command()
@@ -58,10 +62,13 @@ class Message_Commands(commands.Cog):
         else:
             await ctx.send("Welcome to Jason quotes V1.0, type /jason 1-4 for some famous quotes")
 
+        print('The Kwan was called')
+
 
     @commands.command()
     async def echo(self, ctx, message: str):
         await ctx.send(message)
+        print(f'Echoed {message}')
 
 
     @commands.command()
@@ -70,6 +77,7 @@ class Message_Commands(commands.Cog):
         await ctx.channel.purge(limit = num)
         time.sleep(2)
         await ctx.send(f"Deleted {num} messages!")
+        print(f'Deleted {num} messages from {ctx.channel.name}')
 
 
 def setup(client):
