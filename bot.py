@@ -68,6 +68,7 @@ async def movehere(ctx): # moves all members in vc to the vc of the author
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
+        print(f'Loaded cog: {filename}')
 
 
 # RUN
