@@ -72,12 +72,21 @@ class Message_Commands(commands.Cog):
 
 
     @commands.command()
+    async def source(self, ctx):
+        await ctx.send(f'Asi4nBot was made by Asi4n#4243\nSource: github.com/Asi4n-Inv4sion/Asi4nBot')
+
+
+    @commands.command()
     @commands.has_permissions(manage_messages = True)
     async def clear(self, ctx, num=0):
         await ctx.channel.purge(limit = num)
         time.sleep(2)
         await ctx.send(f"Deleted {num} messages!")
         print(f'Deleted {num} messages from {ctx.channel.name}')
+        temp = ctx.channel.last_message_id
+        async for message in ctx.channel.history(limit=5):
+            if message.id == temp:
+                await message.delete(delay = 3)
 
 
 def setup(client):

@@ -21,11 +21,12 @@ class Math_Commands(commands.Cog):
     def __init__(self, client):
         self.client = client
 
+
     @commands.command(aliases=['wolfram', 'wr', 'q'])
     async def query(self, ctx, *, q):
-        global wolfram_client
-        res = wolfram_client.query(q)
+        # global wolfram_client
         print(f"Queried {q}")
+        res = wolfram_client.query(q)
         await ctx.send(next(res.results).text)
 
 
