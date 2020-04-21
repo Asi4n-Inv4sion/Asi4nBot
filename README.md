@@ -10,7 +10,9 @@ Current features:
 Planned features:
 - Election organization
 
+
 Command prefex = '/'
+
 
 Current list of user commands
 
