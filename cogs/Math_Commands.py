@@ -27,6 +27,7 @@ class Math_Commands(commands.Cog):
         # global wolfram_client
         print(f"Queried {q}")
         res = wolfram_client.query(q)
+        print(f"Result: {next(res.results).text}")
         await ctx.send(next(res.results).text)
 
 
