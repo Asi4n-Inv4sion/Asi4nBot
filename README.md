@@ -10,13 +10,10 @@ Current features:
 Planned features:
 - Election organization
 
-
+## Current list of user commands
 Command prefex = '/'
 
-
-Current list of user commands
-
-Message commands:
+### Message commands
 - clear {num} - clears the last num messages (including the one used to invoke the command)
 - dinner - @'s the 'dinner squad' role (specific to my personal server)
 - echo {message} - echos message
@@ -24,8 +21,8 @@ Message commands:
 - nuke - nukes the server
 - tsar bomba - was the BIGGEST bomb ever created
   
-Moderator commands:
+### Moderator commands
 - movehere - moves all users in voice to the channel of the person who called it
   
-Math commands:
+### Math commands
 - wolfram {message} - searches the wolframalpha database (aliases: 'wr', 'query', 'q')
