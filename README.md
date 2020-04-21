@@ -19,7 +19,7 @@ Command prefex = '/'
 - echo {message} - echos message
 - jason {num} - random quotes from Jason Kwan
 - nuke - nukes the server
-- tsar bomba - was the BIGGEST bomb ever created
+- tsar_bomba - was the BIGGEST bomb ever created
   
 ### Moderator commands
 - movehere - moves all users in voice to the channel of the person who called it
