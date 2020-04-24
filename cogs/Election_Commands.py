@@ -59,9 +59,20 @@ class Election_Commands(commands.Cog):
         f.close()
 
 
+    @commands.command()
+    async def candidates(self, ctx):
 
+        f = open('Candidates.txt', 'r')
 
+        candidates = f.readlines()
+        if candidates == []:
+            await ctx.send("There are no current candidates.")
+        else:
+            await ctx.send("Current candidates:")
+            for line in candidates:
+                await ctx.send(f'<@!{line.strip()}>')
 
+        f.close()
 
 
 def setup(client):
