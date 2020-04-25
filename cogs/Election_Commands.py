@@ -84,8 +84,6 @@ class Election_Commands(commands.Cog):
             l = line.strip().split(':')
             voters_to_candidates[l[0]] = l[1]
 
-        print(voters_to_candidates)
-
         for line in candidates.readlines():
             l = line.strip().split(':')
             candidates_to_votes[l[0]] = int(l[1])
