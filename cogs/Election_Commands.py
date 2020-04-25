@@ -35,7 +35,7 @@ class Election_Commands(commands.Cog):
         print(f'{ctx.author.mention} used unelectme')
         elected = False
         people = []
-        f = open('Candidates.txt', 'r+')
+        f = open('Candidates.txt', 'r')
 
         for line in f.readlines():
             if line.strip().split(':')[0] == str(ctx.author.id):
@@ -44,17 +44,26 @@ class Election_Commands(commands.Cog):
                 people.append(line.strip())
 
         if elected:
-            f.truncate(0)
-
+            f = open('Candidates.txt', 'w')
             for person in people:
                 f.write(person + '\n')
 
             await ctx.send(f"{ctx.author.mention} is no longer running in the election!")
-
         else:
             await ctx.send("You are not running in the election.")
 
         f.close()
+
+        f = open('Voters.txt', 'r')
+        voters_to_candidates = {}
+        for line in f.readlines():
+            l = line.strip().split(':')
+            if l[1] != str(ctx.author.id):
+                voters_to_candidates[l[0]] = l[1]
+
+        f = open('Voters.txt', 'w')
+        for voter in voters_to_candidates:
+            f.write(f"{voter}:{voters_to_candidates[voter]}")
 
 
     @commands.command()
