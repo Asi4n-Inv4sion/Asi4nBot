@@ -68,7 +68,7 @@ class Election_Commands(commands.Cog):
         else:
             await ctx.send("Current candidates:")
             for line in candidates:
-                await ctx.send(f'<@!{line.strip()}>')
+                await ctx.send(f'<@!{line.strip().split(":")[0]}>')
 
         f.close()
 
