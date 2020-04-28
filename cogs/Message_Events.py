@@ -23,6 +23,9 @@ class Message_Events(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
+        if message.author == bot.user:
+            return
+
         if not message.content.startswith('/'):
             words = open('Forbidden_Words.txt', 'r')
 
