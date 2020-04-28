@@ -33,7 +33,7 @@ class Message_Events(commands.Cog):
 
             illegal = False
             for w in word_list:
-                if w in message.content:
+                if w in message.content.lower():
                     illegal = True
 
             counter = open("Word_Counter.txt", 'r')
@@ -54,7 +54,7 @@ class Message_Events(commands.Cog):
                 # update the total counter with the sent message
                 if str(message.author.id) in total_counter:
                     for w in word_list:
-                        if w in message.content:
+                        if w in message.content.lower():
                             if w in total_counter[str(message.author.id)]:
                                 total_counter[str(message.author.id)][w] = int(total_counter[str(message.author.id)][w])
                                 total_counter[str(message.author.id)][w] += 1
@@ -64,7 +64,7 @@ class Message_Events(commands.Cog):
                 else:
                     new_counter = {}
                     for w in word_list:
-                        if w in message.content:
+                        if w in message.content.lower():
                             new_counter[w] = 1
                     total_counter[str(message.author.id)] = new_counter
 

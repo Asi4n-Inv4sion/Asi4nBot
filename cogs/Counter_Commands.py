@@ -21,10 +21,10 @@ class Counter_Commands(commands.Cog):
             word_list.append(l)
 
         if message in word_list:
-            await ctx.send(f"{message} is already forbidden!")
+            await ctx.send(f"{message.lower()} is already forbidden!")
         else:
-            words.write(f"{message}\n")
-            await ctx.send(f'"{message}" has been forbidden!')
+            words.write(f"{message.lower()}\n")
+            await ctx.send(f'"{message.lower()}" has been forbidden!')
 
 
     @commands.command()
@@ -36,9 +36,9 @@ class Counter_Commands(commands.Cog):
             l = line.strip()
             word_list.append(l)
 
-        if (message in word_list):
-            word_list.remove(message)
-            await ctx.send(f"{message} has been unforbidden!")
+        if message.lower() in word_list:
+            word_list.remove(message.lower())
+            await ctx.send(f"{message.lower()} has been unforbidden!")
 
             # reused code from message_events cog
             counter = open("Word_Counter.txt", 'r')
@@ -50,7 +50,7 @@ class Counter_Commands(commands.Cog):
                     id = counter.readline().strip().split(':')
                     for j in range(int(id[1])):
                         word = counter.readline().strip().split(':')
-                        if word[0] != message: # this removes the unforbidden word
+                        if word[0] != message.lower(): # this removes the unforbidden word
                             id_counter[word[0]] = word[1]
                     if (len(id_counter) > 0): # removes members who have no words stored
                         total_counter[id[0]] = id_counter
@@ -65,7 +65,7 @@ class Counter_Commands(commands.Cog):
             counter.close()
 
         else:
-            await ctx.send(f"{message} is not currently forbidden.")
+            await ctx.send(f"{message.lower()} is not currently forbidden.")
 
         words = open('Forbidden_Words.txt', 'w')
         for word in word_list:
@@ -80,7 +80,7 @@ class Counter_Commands(commands.Cog):
         if member.startswith("<@") and len(member) >= 21:
             for line in lines:
                 if member[3:-1] in line or member[2:-1] in line:
-                    await ctx.send(f"{member} has said the following")
+                    await ctx.send(f"{member} has said the following:")
                     l = line.strip().split(':')
                     index = lines.index(line)
                     for i in range(1, int(l[1])+1):
