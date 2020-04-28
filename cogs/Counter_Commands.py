@@ -39,6 +39,31 @@ class Counter_Commands(commands.Cog):
         if (message in word_list):
             word_list.remove(message)
             await ctx.send(f"{message} has been unforbidden!")
+
+            # reused code from message_events cog
+            counter = open("Word_Counter.txt", 'r')
+            first = counter.readline().strip()
+            total_counter = {}
+            if first != '':
+                for i in range(int(first)):
+                    id_counter = {}
+                    id = counter.readline().strip().split(':')
+                    for j in range(int(id[1])):
+                        word = counter.readline().strip().split(':')
+                        if word[0] != message: # this removes the unforbidden word
+                            id_counter[word[0]] = word[1]
+                    if (len(id_counter) > 0): # removes members who have no words stored
+                        total_counter[id[0]] = id_counter
+
+            counter = open("Word_Counter.txt", 'w')
+            counter.write(f"{len(total_counter)}\n")
+            for member in total_counter:
+                counter.write(f"{member}:{len(total_counter[member])}\n")
+                for w in total_counter[member]:
+                    counter.write(f"{w}:{total_counter[member][w]}\n")
+
+            counter.close()
+
         else:
             await ctx.send(f"{message} is not currently forbidden.")
 
@@ -64,8 +89,6 @@ class Counter_Commands(commands.Cog):
                         return
 
         guild_members = [member.mention for member in ctx.guild.members]
-        print(member)
-        print(guild_members)
         if member not in guild_members:
             await ctx.send(f'"{member}" does not exist')
         else:
