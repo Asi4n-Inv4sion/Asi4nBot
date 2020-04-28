@@ -23,7 +23,7 @@ class Message_Events(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.author == client.user:
+        if message.author == self.client.user:
             return
 
         if not message.content.startswith('/'):

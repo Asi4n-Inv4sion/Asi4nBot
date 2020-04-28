@@ -14,6 +14,13 @@ class Counter_Commands(commands.Cog):
 
     @commands.command()
     async def forbid(self, ctx, message: str):
+        lowered_message = ''
+        for char in message:
+            if char.isalpha():
+                lowered_message += char.lower()
+            else:
+                lowered_message += char
+
         words = open('Forbidden_Words.txt', 'r+')
         word_list = []
         for line in words.readlines():
@@ -21,14 +28,21 @@ class Counter_Commands(commands.Cog):
             word_list.append(l)
 
         if message in word_list:
-            await ctx.send(f"{message.lower()} is already forbidden!")
+            await ctx.send(f"{lowered_message} is already forbidden!")
         else:
-            words.write(f"{message.lower()}\n")
-            await ctx.send(f'"{message.lower()}" has been forbidden!')
+            words.write(f"{lowered_message}\n")
+            await ctx.send(f'"{lowered_message}" has been forbidden!')
 
 
     @commands.command()
-    async def unforbid(self, ctx, message: str): # REMEMBER TO REMOVE THE WORD FROM THE Word_Counters.txt
+    async def unforbid(self, ctx, message: str):
+        lowered_message = ''
+        for char in message:
+            if char.isalpha():
+                lowered_message += char.lower()
+            else:
+                lowered_message += char
+
         words = open('Forbidden_Words.txt', 'r')
 
         word_list = []
@@ -36,9 +50,9 @@ class Counter_Commands(commands.Cog):
             l = line.strip()
             word_list.append(l)
 
-        if message.lower() in word_list:
-            word_list.remove(message.lower())
-            await ctx.send(f"{message.lower()} has been unforbidden!")
+        if lowered_message in word_list:
+            word_list.remove(lowered_message)
+            await ctx.send(f"{lowered_message} has been unforbidden!")
 
             # reused code from message_events cog
             counter = open("Word_Counter.txt", 'r')
@@ -50,7 +64,7 @@ class Counter_Commands(commands.Cog):
                     id = counter.readline().strip().split(':')
                     for j in range(int(id[1])):
                         word = counter.readline().strip().split(':')
-                        if word[0] != message.lower(): # this removes the unforbidden word
+                        if word[0] != lowered_message: # this removes the unforbidden word
                             id_counter[word[0]] = word[1]
                     if (len(id_counter) > 0): # removes members who have no words stored
                         total_counter[id[0]] = id_counter
