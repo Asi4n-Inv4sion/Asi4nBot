@@ -84,9 +84,11 @@ class Counter_Commands(commands.Cog):
                     l = line.strip().split(':')
                     index = lines.index(line)
                     for i in range(1, int(l[1])+1):
-                        await ctx.send(f'"{lines[index+i].strip().split(":")[0]}" - {lines[index+i].strip().split(":")[1]} times')
-                        lines.close()
-                        return
+                        current_line = lines[index+i].strip().split(":")
+                        await ctx.send(f'"{current_line[0]}" - {current_line[1]} times')
+
+                    lines.close()
+                    return
 
         guild_members = [member.mention for member in ctx.guild.members]
         if member not in guild_members:
