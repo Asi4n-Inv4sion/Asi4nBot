@@ -51,9 +51,8 @@ class Message_Events(commands.Cog):
                             id_counter[word[0]] = word[1]
                         total_counter[id[0]] = id_counter
 
-
+                # update the total counter with the sent message
                 if str(message.author.id) in total_counter:
-                    # update the total counter with the sent message
                     for w in word_list:
                         if w in message.content:
                             if w in total_counter[str(message.author.id)]:

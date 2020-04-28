@@ -28,7 +28,7 @@ class Counter_Commands(commands.Cog):
 
 
     @commands.command()
-    async def unforbid(self, ctx, message: str):
+    async def unforbid(self, ctx, message: str): # REMEMBER TO REMOVE THE WORD FROM THE Word_Counters.txt
         words = open('Forbidden_Words.txt', 'r')
 
         word_list = []
@@ -52,16 +52,26 @@ class Counter_Commands(commands.Cog):
         print(f"Checking swear jar of {member}")
         f = open('Word_Counter.txt', 'r')
         lines = f.readlines()
-        for line in lines:
-            if member[3:-1] in line:
-                await ctx.send(f"{member} has said the following")
-                l = line.strip().split(':')
-                index = lines.index(line)
-                for i in range(1, int(l[1])+1):
-                    await ctx.send(f'"{lines[index+i].strip().split(":")[0]}" - {lines[index+i].strip().split(":")[1]} times')
-                return
+        if member.startswith("<@") and len(member) >= 21:
+            for line in lines:
+                if member[3:-1] in line or member[2:-1] in line:
+                    await ctx.send(f"{member} has said the following")
+                    l = line.strip().split(':')
+                    index = lines.index(line)
+                    for i in range(1, int(l[1])+1):
+                        await ctx.send(f'"{lines[index+i].strip().split(":")[0]}" - {lines[index+i].strip().split(":")[1]} times')
+                        lines.close()
+                        return
 
-        await ctx.send(f"{member} either does not exist or hasn't said any forbidden words.")
+        guild_members = [member.mention for member in ctx.guild.members]
+        print(member)
+        print(guild_members)
+        if member not in guild_members:
+            await ctx.send(f'"{member}" does not exist')
+        else:
+            await ctx.send(f"{member} hasn't said any forbidden words")
+
+        lines.close()
 
 
 def setup(client):
