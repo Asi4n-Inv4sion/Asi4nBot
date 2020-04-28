@@ -12,7 +12,6 @@ client = commands.Bot(command_prefix = '/')
 f = open(os.path.join('D:/Documents/Programming/BotToken.txt'))  # BotToken.txt contains the private token
 TOKEN = f.readline()
 f.close()
-
 # EVENTS
 
 @client.event
