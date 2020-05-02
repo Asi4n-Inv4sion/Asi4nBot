@@ -97,23 +97,22 @@ class Election_Commands(commands.Cog):
             l = line.strip().split(':')
             candidates_to_votes[l[0]] = int(l[1])
 
-        if candidate[3:-1] in candidates_to_votes:
+        if candidate[3:-1] in candidates_to_votes or candidate[2:-1] in candidates_to_votes:
             if str(ctx.author.id) == candidate[3:-1]:
                 await ctx.send("You can't vote for yourself, dummy")
                 return
             elif str(ctx.author.id) in voters_to_candidates:
-                if candidate[3:-1] == voters_to_candidates[str(ctx.author.id)]:
+                if candidate[2:-1] == voters_to_candidates[str(ctx.author.id)]:
                     await ctx.send(f"You are already voting for {candidate}")
                 else:
-                    candidates_to_votes[candidate[3:-1]] += 1
+                    candidates_to_votes[candidate[2:-1]] += 1
                     candidates_to_votes[voters_to_candidates[str(ctx.author.id)]] -= 1
                     await ctx.send(f"You changed your vote to {candidate}")
                     voters_to_candidates[str(ctx.author.id)] = candidate[3:-1]
             else:
-                candidates_to_votes[candidate[3:-1]] += 1
+                candidates_to_votes[candidate[2:-1]] += 1
                 await ctx.send(f"You voted for {candidate}")
-                voters_to_candidates[str(ctx.author.id)] = candidate[3:-1]
-
+                voters_to_candidates[str(ctx.author.id)] = candidate[2:-1]
 
         else:
             await ctx.send("Choose from the folliowing candidates (use /vote {@candidate}):")

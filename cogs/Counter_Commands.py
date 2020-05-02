@@ -13,6 +13,7 @@ class Counter_Commands(commands.Cog):
 
 
     @commands.command()
+    @commands.has_permissions(administrator = True)
     async def forbid(self, ctx, message: str):
         lowered_message = ''
         for char in message:
@@ -34,7 +35,9 @@ class Counter_Commands(commands.Cog):
             await ctx.send(f'"{lowered_message}" has been forbidden!')
 
 
+
     @commands.command()
+    @commands.has_permissions(administrator = True)
     async def unforbid(self, ctx, message: str):
         lowered_message = ''
         for char in message:
