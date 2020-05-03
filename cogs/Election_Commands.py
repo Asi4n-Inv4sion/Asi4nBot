@@ -85,6 +85,12 @@ class Election_Commands(commands.Cog):
     @commands.command()
     async def vote(self, ctx, candidate: str):
         print(f"{ctx.author} voted for {candidate}")
+        # Fixes mentions sometimes having an exclaimation mark for whatever reason
+        cand = ''
+        for c in candidate:
+            if c.isdigit():
+                cand += c
+
         candidates = open("Candidates.txt", 'r')
         voters = open("Voters.txt", 'r')
         candidates_to_votes = {}
@@ -97,22 +103,22 @@ class Election_Commands(commands.Cog):
             l = line.strip().split(':')
             candidates_to_votes[l[0]] = int(l[1])
 
-        if candidate[3:-1] in candidates_to_votes or candidate[2:-1] in candidates_to_votes:
-            if str(ctx.author.id) == candidate[3:-1]:
+        if cand in candidates_to_votes:
+            if str(ctx.author.id) == cand:
                 await ctx.send("You can't vote for yourself, dummy")
                 return
             elif str(ctx.author.id) in voters_to_candidates:
-                if candidate[2:-1] == voters_to_candidates[str(ctx.author.id)]:
+                if cand == voters_to_candidates[str(ctx.author.id)]:
                     await ctx.send(f"You are already voting for {candidate}")
                 else:
-                    candidates_to_votes[candidate[2:-1]] += 1
+                    candidates_to_votes[cand] += 1
                     candidates_to_votes[voters_to_candidates[str(ctx.author.id)]] -= 1
                     await ctx.send(f"You changed your vote to {candidate}")
-                    voters_to_candidates[str(ctx.author.id)] = candidate[3:-1]
+                    voters_to_candidates[str(ctx.author.id)] = cand
             else:
-                candidates_to_votes[candidate[2:-1]] += 1
+                candidates_to_votes[cand] += 1
                 await ctx.send(f"You voted for {candidate}")
-                voters_to_candidates[str(ctx.author.id)] = candidate[2:-1]
+                voters_to_candidates[str(ctx.author.id)] = cand
 
         else:
             await ctx.send("Choose from the folliowing candidates (use /vote {@candidate}):")
