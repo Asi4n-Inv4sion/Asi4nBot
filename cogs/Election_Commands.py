@@ -140,12 +140,13 @@ class Election_Commands(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(administrator = True)
-    async def results(ctx):
+    async def results(self, ctx):
+        print("Displaying results of the election")
         results = open("Candidates.txt", "r")
 
         most_votes = 0
         winner = []
-        for line in result.readlines():
+        for line in results.readlines():
             cand = line.strip().split(':')
             await ctx.send(f'<@{cand[0]}> has {cand[1]} votes')
             if int(cand[1]) > most_votes:
@@ -153,12 +154,15 @@ class Election_Commands(commands.Cog):
                 most_votes = int(cand[1])
             elif int(cand[1]) == most_votes:
                 winner.append(cand[0])
+
         if len(winner) > 1:
             await ctx.send("It's a tie between:")
             for person in winner:
                 await ctx.send(f'<@{person}>')
         else:
             await ctx.send(f'The new president is <@{winner[0]}>!!!')
+
+        results.close()
 
 
 def setup(client):
