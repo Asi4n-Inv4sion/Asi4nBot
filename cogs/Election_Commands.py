@@ -63,7 +63,7 @@ class Election_Commands(commands.Cog):
 
         f = open('Voters.txt', 'w')
         for voter in voters_to_candidates:
-            f.write(f"{voter}:{voters_to_candidates[voter]}")
+            f.write(f"{voter}:{voters_to_candidates[voter]}\n")
 
 
     @commands.command()
