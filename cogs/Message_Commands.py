@@ -73,7 +73,7 @@ class Message_Commands(commands.Cog):
 
     @commands.command()
     async def source(self, ctx):
-        await ctx.send(f'Asi4nBot was made by Asi4n#4243\nSource: github.com/Asi4n-Inv4sion/Asi4nBot')
+        await ctx.send(f'Asi4nBot was made by Asi4n#4243\nSource: github.com/Leo-Wang-Toronto/Asi4nBot')
 
 
     @commands.command()
