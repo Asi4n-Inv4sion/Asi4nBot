@@ -19,12 +19,6 @@ class Message_Commands(commands.Cog):
 
 
     @commands.command()
-    async def dinner(self, ctx):
-        await ctx.send('<@&631594442771660801> the table is set.')
-        print('Dinner has been called')
-
-
-    @commands.command()
     async def nuke(self, ctx):
         await ctx.send('<:nuke:535289100761038869> TACTICAL NUKE INCOMING <:nuke:535289100761038869>')
         print('A nuke was dropped')
