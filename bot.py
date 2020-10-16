@@ -32,21 +32,21 @@ async def on_command_error(ctx, error):
 # COMMANDS
 
 @client.command()
-@commands.has_permissions(administrator = True)
+@commands.has_permissions(administrator=True)
 async def load_cog(ctx, extension):
     client.load_extension(f'cogs.{extension}')
     print(f'Loaded cog: {extension}')
 
 
 @client.command()
-@commands.has_permissions(administrator = True)
+@commands.has_permissions(administrator=True)
 async def unload_cog(ctx, extension):
     client.unload_extension(f'cogs.{extension}')
     print(f'Unloaded cog: {extension}')
 
 
 @client.command()
-@commands.has_permissions(administrator = True)
+@commands.has_permissions(administrator=True)
 async def movehere(ctx):  # moves all members in vc to the vc of the author
     channels = ctx.guild.voice_channels
     for channel in channels:
