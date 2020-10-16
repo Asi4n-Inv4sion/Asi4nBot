@@ -47,7 +47,16 @@ class Message_Commands(commands.Cog):
 
     @commands.command()
     async def source(self, ctx):
-        await ctx.send(f'Asi4nBot was made by Asi4n#4243\nSource: github.com/Leo-Wang-Toronto/Asi4nBot')
+        embed = discord.Embed(
+            title='Asi4n Discord Bot',
+            description='Discord bot for general use',
+            colour=discord.Colour.gold(),
+            url='https://github.com/Leo-Wang-Toronto/Asi4nBot'
+        )
+
+        embed.set_image(url='https://cdn.discordapp.com/attachments/452559141458935808/766789463337730118/face.png')
+        embed.add_field(name='Made by Asi4n#4243', value='github.com/Leo-Wang-Toronto')
+        await ctx.send(embed=embed)
 
     @commands.command()
     @commands.has_permissions(manage_messages=True)
