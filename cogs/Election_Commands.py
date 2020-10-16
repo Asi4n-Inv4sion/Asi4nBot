@@ -10,12 +10,11 @@ class Election_Commands(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-
     @commands.command()
     async def electme(self, ctx):
 
         print(f'{ctx.author.mention} used electme')
-        f = open('Candidates.txt', 'r')
+        f = open('data/text_data/Candidates.txt', 'r')
 
         for line in f.readlines():
             if line.strip().split(':')[0] == str(ctx.author.id):
@@ -23,7 +22,7 @@ class Election_Commands(commands.Cog):
                 return
         f.close()
 
-        f = open('Candidates.txt', 'a')
+        f = open('data/text_data/Candidates.txt', 'a')
         f.write(f'{ctx.author.id}:0\n')
         await ctx.send(f"{ctx.author.mention} is now running in the election!")
         f.close()
@@ -35,7 +34,7 @@ class Election_Commands(commands.Cog):
         print(f'{ctx.author.mention} used unelectme')
         elected = False
         people = []
-        f = open('Candidates.txt', 'r')
+        f = open('data/text_data/Candidates.txt', 'r')
 
         for line in f.readlines():
             if line.strip().split(':')[0] == str(ctx.author.id):
@@ -54,14 +53,14 @@ class Election_Commands(commands.Cog):
 
         f.close()
 
-        f = open('Voters.txt', 'r')
+        f = open('data/text_data/Voters.txt', 'r')
         voters_to_candidates = {}
         for line in f.readlines():
             l = line.strip().split(':')
             if l[1] != str(ctx.author.id):
                 voters_to_candidates[l[0]] = l[1]
 
-        f = open('Voters.txt', 'w')
+        f = open('data/text_data/Voters.txt', 'w')
         for voter in voters_to_candidates:
             f.write(f"{voter}:{voters_to_candidates[voter]}\n")
 
@@ -69,7 +68,7 @@ class Election_Commands(commands.Cog):
     @commands.command()
     async def candidates(self, ctx):
 
-        f = open('Candidates.txt', 'r')
+        f = open('data/text_data/Candidates.txt', 'r')
 
         candidates = f.readlines()
         if candidates == []:
@@ -91,8 +90,8 @@ class Election_Commands(commands.Cog):
             if c.isdigit():
                 cand += c
 
-        candidates = open("Candidates.txt", 'r')
-        voters = open("Voters.txt", 'r')
+        candidates = open("data/text_data/Candidates.txt", 'r')
+        voters = open("data/text_data/Voters.txt", 'r')
         candidates_to_votes = {}
         voters_to_candidates = {}
         for line in voters.readlines():
@@ -125,8 +124,8 @@ class Election_Commands(commands.Cog):
             for c in candidates_to_votes:
                 await ctx.send(f"<@!{c}>")
 
-        candidates = open("Candidates.txt", 'w')
-        voters = open("Voters.txt", 'w')
+        candidates = open("data/text_data/Candidates.txt", 'w')
+        voters = open("data/text_data/Voters.txt", 'w')
 
         for key in candidates_to_votes:
             candidates.write(f"{key}:{candidates_to_votes[key]}\n")
@@ -142,7 +141,7 @@ class Election_Commands(commands.Cog):
     @commands.has_permissions(administrator = True)
     async def results(self, ctx):
         print("Displaying results of the election")
-        results = open("Candidates.txt", "r")
+        results = open("data/text_data/Candidates.txt", "r")
 
         most_votes = 0
         winner = []

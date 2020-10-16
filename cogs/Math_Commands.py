@@ -5,11 +5,9 @@
 import discord
 from discord.ext import commands
 import wolframalpha
-import os
-import time
 
 # Load WolframAlpha AppID
-f = open(os.path.join('D:/Documents/Programming/WolframAppID.txt'))  # BotToken.txt contains the private token
+f = open('WolframAppID.txt', 'r')
 ID = f.readline().strip()
 f.close()
 
@@ -20,7 +18,6 @@ class Math_Commands(commands.Cog):
 
     def __init__(self, client):
         self.client = client
-
 
     @commands.command(aliases=['query', 'wr', 'q'])
     async def wolfram(self, ctx, *, q):

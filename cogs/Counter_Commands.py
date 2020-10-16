@@ -22,7 +22,7 @@ class Counter_Commands(commands.Cog):
             else:
                 lowered_message += char
 
-        words = open('Forbidden_Words.txt', 'r+')
+        words = open('data/text_data/Forbidden_Words.txt', 'r+')
         word_list = []
         for line in words.readlines():
             l = line.strip()
@@ -46,7 +46,7 @@ class Counter_Commands(commands.Cog):
             else:
                 lowered_message += char
 
-        words = open('Forbidden_Words.txt', 'r')
+        words = open('data/text_data/Forbidden_Words.txt', 'r')
 
         word_list = []
         for line in words.readlines():
@@ -58,7 +58,7 @@ class Counter_Commands(commands.Cog):
             await ctx.send(f"{lowered_message} has been unforbidden!")
 
             # reused code from message_events cog
-            counter = open("Word_Counter.txt", 'r')
+            counter = open("data/text_data/Word_Counter.txt", 'r')
             first = counter.readline().strip()
             total_counter = {}
             if first != '':
@@ -72,7 +72,7 @@ class Counter_Commands(commands.Cog):
                     if (len(id_counter) > 0): # removes members who have no words stored
                         total_counter[id[0]] = id_counter
 
-            counter = open("Word_Counter.txt", 'w')
+            counter = open("data/text_data/Word_Counter.txt", 'w')
             counter.write(f"{len(total_counter)}\n")
             for member in total_counter:
                 counter.write(f"{member}:{len(total_counter[member])}\n")
@@ -84,7 +84,7 @@ class Counter_Commands(commands.Cog):
         else:
             await ctx.send(f"{message.lower()} is not currently forbidden.")
 
-        words = open('Forbidden_Words.txt', 'w')
+        words = open('data/text_data/Forbidden_Words.txt', 'w')
         for word in word_list:
             words.write(f"{word}\n")
 
@@ -92,7 +92,7 @@ class Counter_Commands(commands.Cog):
     @commands.command(aliases = ['swearjar'])
     async def check(self, ctx, member: str):
         print(f"Checking swear jar of {member}")
-        f = open('Word_Counter.txt', 'r')
+        f = open('data/text_data/Word_Counter.txt', 'r')
         lines = f.readlines()
         if member.startswith("<@") and len(member) >= 21:
             for line in lines:

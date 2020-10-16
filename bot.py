@@ -8,16 +8,18 @@ from discord.ext import commands
 
 # INITIALIZATION
 
-client = commands.Bot(command_prefix = '/')
-f = open(os.path.join('D:/Documents/Programming/BotToken.txt'))  # BotToken.txt contains the private token
+client = commands.Bot(command_prefix='/')
+f = open('BotToken.txt', 'r')  # BotToken.txt contains the private token
 TOKEN = f.readline()
 f.close()
+
 # EVENTS
+
 
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
-    await client.change_presence(activity = discord.Game('with my code'))
+    await client.change_presence(activity=discord.Game('with my code'))
 
 
 @client.event
@@ -45,7 +47,7 @@ async def unload_cog(ctx, extension):
 
 @client.command()
 @commands.has_permissions(administrator = True)
-async def movehere(ctx): # moves all members in vc to the vc of the author
+async def movehere(ctx):  # moves all members in vc to the vc of the author
     channels = ctx.guild.voice_channels
     for channel in channels:
         for member in channel.members:
