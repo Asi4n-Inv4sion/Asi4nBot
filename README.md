@@ -1,6 +1,8 @@
 # Asi4nBot
 Personal general use discord bot
 
+(ARCHIVED IN FAVOUR OF THE NEW SHIVER BOT)
+
 Current features:
 - Random meme message commands
 - Command to move all members to a channel (/movehere)
